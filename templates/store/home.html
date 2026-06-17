@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block title %}ShopAlpha — Home{% endblock %} {%
+block content %}
+<section class="hero">
+    <h1>Welcome to ShopAlpha</h1>
+    <p>Discover amazing products at great prices.</p>
+</section>
+
+<div class="category-filter">
+    <a
+        href="{% url 'home' %}"
+        class="btn {% if not selected_category %}btn-active{% endif %}"
+        >All</a
+    >
+    {% for cat in categories %}
+    <a
+        href="?category={{ cat.slug }}"
+        class="btn {% if selected_category == cat.slug %}btn-active{% endif %}"
+    >
+        {{ cat.name }}
+    </a>
+    {% endfor %}
+</div>
+
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+        {% else %}
+        <div class="product-placeholder">📦</div>
+        {% endif %}
+        <div class="product-info">
+            <h3>
+                <a href="{% url 'product_detail' product.slug %}"
+                    >{{ product.name }}</a
+                >
+            </h3>
+            <p class="price">${{ product.price }}</p>
+            <p class="stock">
+                {% if product.stock > 0 %}✅ In Stock{% else %}❌ Out of Stock{%
+                endif %}
+            </p>
+            {% if product.stock > 0 %}
+            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary"
+                >Add to Cart</a
+            >
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <p class="no-products">No products found.</p>
+    {% endfor %}
+</div>
+{% endblock %}

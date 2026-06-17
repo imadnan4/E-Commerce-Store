@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block title %}{{ product.name }}{% endblock %} {%
+block content %}
+<div class="product-detail">
+    <div class="product-detail-image">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+        {% else %}
+        <div class="product-placeholder large">📦</div>
+        {% endif %}
+    </div>
+    <div class="product-detail-info">
+        <h1>{{ product.name }}</h1>
+        {% if product.category %}
+        <span class="category-badge">{{ product.category.name }}</span>
+        {% endif %}
+        <p class="price large">${{ product.price }}</p>
+        <p class="description">{{ product.description }}</p>
+        <p class="stock">
+            {% if product.stock > 0 %} ✅ {{ product.stock }} items in stock {%
+            else %} ❌ Out of Stock {% endif %}
+        </p>
+        {% if product.stock > 0 %}
+        <a
+            href="{% url 'add_to_cart' product.id %}"
+            class="btn btn-primary btn-large"
+        >
+            🛒 Add to Cart
+        </a>
+        {% endif %}
+        <a href="{% url 'home' %}" class="btn btn-secondary">← Back to Shop</a>
+    </div>
+</div>
+{% endblock %}
