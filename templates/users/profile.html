@@ -1,22 +1,24 @@
-{% extends 'base.html' %} {% block title %}My Profile{% endblock %} {% block
-content %}
+{% extends 'base.html' %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
 <div class="profile-container">
     <h1>My Profile</h1>
     <form method="POST" class="profile-form">
         {% csrf_token %}
         <h2>Account Info</h2>
         {% for field in u_form %}
-        <div class="form-group">
-            <label>{{ field.label }}</label>
-            {{ field }}
-        </div>
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+                {{ field }}
+            </div>
         {% endfor %}
         <h2>Address Info</h2>
         {% for field in p_form %}
-        <div class="form-group">
-            <label>{{ field.label }}</label>
-            {{ field }}
-        </div>
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+                {{ field }}
+            </div>
         {% endfor %}
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>
