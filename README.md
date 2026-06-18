@@ -1,4 +1,4 @@
-# 🛒 ShopAlpha — E-Commerce Store
+# 🛒 ShopAlpha E-Commerce Store
 
 > Full-stack e-commerce web application built with Django & PostgreSQL
 
